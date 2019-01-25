@@ -1,0 +1,25 @@
+name: picard_env
+channels:
+  - bioconda
+  - ged
+  - conda-forge
+  - http://conda.anaconda.org/dranew
+  - defaults
+dependencies:
+  - picard=2.18.2
+  - ca-certificates=2018.1.18
+  - certifi=2018.1.18
+  - ncurses=5.9
+  - openssl=1.0.2o
+  - pip=9.0.3
+  - python=3.6.5
+  - readline=7.0
+  - setuptools=39.0.1
+  - sqlite=3.20.1
+  - tk=8.6.7
+  - wheel=0.31.0
+  - xz=5.2.3
+  - zlib=1.2.11
+  - openjdk=8.0.121
+prefix: /home/cjsifuen/miniconda3/envs/picard_env
+

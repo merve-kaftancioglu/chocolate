@@ -1,0 +1,16 @@
+name: ngmerge_env
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+  - ged
+  - http://conda.anaconda.org/dranew
+dependencies:
+  - ngmerge=0.3
+  - libgcc-ng=7.2.0
+  - libstdcxx-ng=7.2.0
+  - llvm-meta=7.0.0
+  - openmp=7.0.0
+  - zlib=1.2.11
+prefix: /home/cjsifuen/miniconda3/envs/ngmerge_env
+

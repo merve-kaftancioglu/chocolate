@@ -1,0 +1,13 @@
+name: fastqc_env
+channels:
+  - bioconda
+  - ged
+  - conda-forge
+  - http://conda.anaconda.org/dranew
+  - defaults
+dependencies:
+  - fastqc=0.11.7
+  - perl=5.22.0.1
+  - openjdk=8.0.121
+prefix: /home/cjsifuen/miniconda3/envs/fastqc_env
+

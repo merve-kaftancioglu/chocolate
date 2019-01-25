@@ -1,0 +1,24 @@
+name: samtools_env
+channels:
+  - bioconda
+  - ged
+  - conda-forge
+  - http://conda.anaconda.org/dranew
+  - defaults
+dependencies:
+  - libdeflate=0.8
+  - samtools=1.8
+  - bzip2=1.0.6
+  - ca-certificates=2018.4.16
+  - curl=7.59.0
+  - krb5=1.14.6
+  - libssh2=1.8.0
+  - ncurses=5.9
+  - openssl=1.0.2o
+  - xz=5.2.3
+  - zlib=1.2.11
+  - libgcc=7.2.0
+  - libgcc-ng=7.2.0
+  - libstdcxx-ng=7.2.0
+prefix: /home/cjsifuen/miniconda3/envs/samtools_env
+

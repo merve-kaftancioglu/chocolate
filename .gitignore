@@ -1,0 +1,15 @@
+
+rules/._sam_to_bed.smk
+rules/._ataqv.smk
+rules/._ataqv_html.smk
+rules/._collect_beds.smk
+rules/._filter_bam.smk
+rules/._macs2.smk
+rules/._multiqc_phantom.smk
+rules/._nucleoatac.smk
+rules/._peaks2bed.smk
+rules/._phantompeak_qual.smk
+rules/._populate_collected_beds.smk
+scripts/._removeChrom.py
+scripts/._SAMtoBED.py
+scripts/._SAMtoBED2.py

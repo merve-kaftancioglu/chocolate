@@ -1,0 +1,11 @@
+name: star_env
+channels:
+  - bioconda
+  - ged
+  - conda-forge
+  - http://conda.anaconda.org/dranew
+  - defaults
+dependencies:
+  - star=2.6.1a
+prefix: /home/cjsifuen/miniconda3/envs/star_env
+

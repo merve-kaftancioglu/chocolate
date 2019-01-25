@@ -1,0 +1,57 @@
+project_dir:
+    '/ccmb/BioinfCore/ActiveProjects/LSA_Denver_rdenver_CU5_cjsifuen_HI-2462/'
+email_address:
+    'cjsifuen@umich.edu'
+analysis_dir_suffix: 
+    'analysis_12_06/'
+input_dir:
+    fastq: '/ccmb/BioinfCore/DNASeqCore/Run_2462/denver/Run_2462/denver/'
+    genome_fasta: '/home/cjsifuen/references/xenopus/tropicalis/hisat2_trans/Xentr41.fa'
+    genome_gtf: '/home/cjsifuen/references/xenopus/tropicalis/hisat2_trans/Xentr41.gtf'
+genome: 
+    'Xentr41' 
+library_info:
+    strandedness: 1 #one of (1) unstranded, (2) forward, (3) reverse
+read_info:
+    paired_ext: ['R1','R2']
+thread_info:
+    alignment: 25
+    fastqc: 6
+    index: 20
+    trim: 5
+    ataqv: 16
+    phantompeakqual: 20
+    nucleoatac: 2
+fastq_screen:
+    aligner: 'bowtie2'
+    subset: 10000
+    multi_species: '/ccmb/BioinfCore/Common/pipelines/Watermelon/references/fastq_screen/multi_species.conf'
+    biotype: '/ccmb/BioinfCore/Common/pipelines/Watermelon/references/fastq_screen/xenopus.conf'
+trim_info:
+    min_overlap: 50
+    max_quality: 50
+fastq_info:
+    read_length: 50
+star_info:
+    gene: 'gene_name'
+mark_duplicates:
+    assumesorted: 'true'
+    validationstringency: 'LENIENT'
+    createindex: 'true'
+filter_bam:
+    mapquality: 30
+macs2:
+    format: 'BEDPE'
+    genome_size: 1137453808
+    shape: 'broad'
+ataqv:
+    autosomalreference: '/ccmb/BioinfCore/ActiveProjects/LSA_Denver_rdenver_CU5_cjsifuen_HI-2462/analysis_12_06/references/Xentr41.autosomalreference.txt'
+    tss: '/ccmb/BioinfCore/ActiveProjects/LSA_Denver_rdenver_CU5_cjsifuen_HI-2462/analysis_12_06/references/tss.bed'
+    organism: 'xenopus'
+    extension: '1000'
+    mitochondrial: 'chrM'
+phantompeakqual:
+    run: '' #add Y to run
+peaks2bed:
+    sizes: '/ccmb/BioinfCore/ActiveProjects/LSA_Denver_rdenver_CU5_cjsifuen_HI-2462/analysis_12_06/references/all.chrom.sizes'
+    

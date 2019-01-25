@@ -1,0 +1,26 @@
+name: bbmap_env
+channels:
+  - bioconda
+  - ged
+  - conda-forge
+  - http://conda.anaconda.org/dranew
+  - defaults
+dependencies:
+  - bbmap=37.90
+  - samtools=1.7
+  - bzip2=1.0.6
+  - ca-certificates=2018.1.18
+  - curl=7.59.0
+  - krb5=1.14.2
+  - libssh2=1.8.0
+  - ncurses=5.9
+  - openssl=1.0.2n
+  - pigz=2.3.4
+  - xz=5.2.3
+  - zlib=1.2.11
+  - libgcc=7.2.0
+  - libgcc-ng=7.2.0
+  - libstdcxx-ng=7.2.0
+  - openjdk=8.0.121
+prefix: /home/cjsifuen/miniconda3/envs/bbmap_env
+
