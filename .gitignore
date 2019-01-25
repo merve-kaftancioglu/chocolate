@@ -13,3 +13,4 @@ rules/._populate_collected_beds.smk
 scripts/._removeChrom.py
 scripts/._SAMtoBED.py
 scripts/._SAMtoBED2.py
+._README.md
