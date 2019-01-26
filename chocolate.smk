@@ -97,8 +97,7 @@ if RUN_PHANTOM.upper() == 'Y':
 #     include: 'rules/multiqc_phantom.smk'
 # else:
 #     include: 'rules/multiqc.smk'
-# include: 'rules/sam_to_bed.smk'
-# include: 'rules/collect_beds.smk'
+include: 'rules/calculateNSCRSC.smk'
 # include: 'rules/macs2.smk'
 # include: 'rules/ataqv.smk'
 # include: 'rules/ataqv_html.smk'
