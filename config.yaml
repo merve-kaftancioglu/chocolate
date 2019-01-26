@@ -21,7 +21,7 @@ thread_info:
     trim: 5
     ataqv: 16
     phantompeakqual: 20
-    nucleoatac: 2
+    deeptools: 40
 fastq_screen:
     aligner: 'bowtie2'
     subset: 10000
@@ -45,12 +45,17 @@ macs2:
     format: 'BEDPE'
     genome_size: 1137453808
     shape: 'broad'
-ataqv:
-    autosomalreference: '/ccmb/BioinfCore/ActiveProjects/LSA_Denver_rdenver_CU5_cjsifuen_HI-2462/analysis_12_06/references/Xentr41.autosomalreference.txt'
-    tss: '/ccmb/BioinfCore/ActiveProjects/LSA_Denver_rdenver_CU5_cjsifuen_HI-2462/analysis_12_06/references/tss.bed'
-    organism: 'xenopus'
-    extension: '1000'
-    mitochondrial: 'chrM'
+plotFingerprint:
+    extendReads: 100
+    numberOfSamples: 500000
+    binSize: 500
+bamCoverage:
+    extendReads: 100
+    normalizeUsing: 'RPKM'
+    binSize: 50
+multiBamSummary:
+    extendReads: 100
+    binSize: 10000
 phantompeakqual:
     run: 'Y' #add Y to run
 peaks2bed:
