@@ -6,7 +6,7 @@ ALL.extend([expand('{directory}{sample}{extension}',
 rule bwa_align:
     input:
         index = REF_DIR + ORG + '.bwt',
-        reads = TRIM_DIR + '{sample}.fastq',
+        reads = TRIM_DIR + '{sample}.trimmed.fastq',
     output:
         sam = ALN_DIR + '{sample}.sam',
     params:

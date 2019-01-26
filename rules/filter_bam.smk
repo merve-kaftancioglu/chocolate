@@ -9,7 +9,7 @@ rule filter_bam:
         bai = MD_DIR + '{sample}.mkdp.bai',
     output:
         bam = MD_DIR + '{sample}.filtered.bam',
-        sorted = ALN_DIR + '{sample}.filtered.sorted.bam',
+        sorted = MD_DIR + '{sample}.filtered.sorted.bam',
         bai = MD_DIR + '{sample}.filtered.sorted.bam.bai',
     params:
         mapquality = config['filter_bam']['mapquality'],

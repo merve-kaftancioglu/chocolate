@@ -3,7 +3,7 @@ project_dir:
 email_address:
     'cjsifuen@umich.edu'
 analysis_dir_suffix: 
-    ''
+    'analysis_01_25/'
 input_dir:
     fastq: '/ccmb/BioinfCore/DNASeqCore/Run_2582/denver/Run_2582/denver/'
     genome_fasta: '/home/cjsifuen/references/mouse/bwa/Mus_musculus.GRCm38.dna.primary_assembly.fa'
@@ -52,7 +52,7 @@ ataqv:
     extension: '1000'
     mitochondrial: 'chrM'
 phantompeakqual:
-    run: '' #add Y to run
+    run: 'Y' #add Y to run
 peaks2bed:
     sizes: '/ccmb/BioinfCore/ActiveProjects/LSA_Denver_rdenver_CU5_cjsifuen_HI-2462/analysis_12_06/references/all.chrom.sizes'
     

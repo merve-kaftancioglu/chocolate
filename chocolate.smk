@@ -76,13 +76,6 @@ READS = config['read_info']['paired_ext']
 
 #set empty all list
 ALL = []
-COLLECTED_BEDS = []
-
-#collect pe-bed files as input to macs2
-if os.path.exists(MD_DIR + 'Collect_beds.done'):
-    bed_list=pd.read_csv(MD_DIR + 'Collect_beds.done', delimiter=',')
-    COLLECTED_BEDS.extend(bed_list)
-    PE_BED_NAMES = [os.path.basename(x).split('.filtered')[0] for x in COLLECTED_BEDS]
 
 #run phantompeakqual?
 RUN_PHANTOM = config['phantompeakqual']['run']
@@ -95,12 +88,12 @@ include: 'rules/fastq_screen_biotype.smk'
 include: 'rules/trim.smk'
 include: 'rules/get_refs.smk'
 include: 'rules/bwa_index.smk'
-# include: 'rules/bwa_align.smk'
-# include: 'rules/sort_index_bam.smk'
-# include: 'rules/mark_duplicates.smk'
-# include: 'rules/filter_bam.smk'
-# if RUN_PHANTOM.upper() == 'Y':
-#     include: 'rules/phantompeak_qual.smk'
+include: 'rules/bwa_align.smk'
+include: 'rules/sort_index_bam.smk'
+include: 'rules/mark_duplicates.smk'
+include: 'rules/filter_bam.smk'
+if RUN_PHANTOM.upper() == 'Y':
+    include: 'rules/phantompeak_qual.smk'
 #     include: 'rules/multiqc_phantom.smk'
 # else:
 #     include: 'rules/multiqc.smk'
