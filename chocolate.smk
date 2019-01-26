@@ -95,22 +95,22 @@ include: 'rules/fastq_screen_biotype.smk'
 include: 'rules/trim.smk'
 include: 'rules/get_refs.smk'
 include: 'rules/bwa_index.smk'
-include: 'rules/bwa_align.smk'
-include: 'rules/sort_index_bam.smk'
-include: 'rules/mark_duplicates.smk'
-include: 'rules/filter_bam.smk'
-if RUN_PHANTOM.upper() == 'Y':
-    include: 'rules/phantompeak_qual.smk'
-    include: 'rules/multiqc_phantom.smk'
-else:
-    include: 'rules/multiqc.smk'
-include: 'rules/sam_to_bed.smk'
-include: 'rules/collect_beds.smk'
-include: 'rules/macs2.smk'
-include: 'rules/ataqv.smk'
-include: 'rules/ataqv_html.smk'
-include: 'rules/peaks2bed.smk'
-include: 'rules/nucleoatac.smk'
+# include: 'rules/bwa_align.smk'
+# include: 'rules/sort_index_bam.smk'
+# include: 'rules/mark_duplicates.smk'
+# include: 'rules/filter_bam.smk'
+# if RUN_PHANTOM.upper() == 'Y':
+#     include: 'rules/phantompeak_qual.smk'
+#     include: 'rules/multiqc_phantom.smk'
+# else:
+#     include: 'rules/multiqc.smk'
+# include: 'rules/sam_to_bed.smk'
+# include: 'rules/collect_beds.smk'
+# include: 'rules/macs2.smk'
+# include: 'rules/ataqv.smk'
+# include: 'rules/ataqv_html.smk'
+# include: 'rules/peaks2bed.smk'
+# include: 'rules/nucleoatac.smk'
 
 #rule all
 rule all:

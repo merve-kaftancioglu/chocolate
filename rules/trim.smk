@@ -1,32 +1,38 @@
-ALL.extend([expand('{directory}{sample}_{read}{extension}',
+ALL.extend([expand('{directory}{sample}{extension}',
                   directory = TRIM_DIR,
                   sample = SAMPLE_NAMES,
-                  read = ['1','2'],
-                  extension = '.fastq'),])
+                  extension = '.trimmed.fastq'),])
                     
 rule trim:
     input:
-        R1 = FASTQ_DIR + '{sample}_R1.fastq',
-        R2 = FASTQ_DIR + '{sample}_R2.fastq'
+        FASTQ_DIR + '{sample}.fastq',
     output:
-        R1 = TRIM_DIR + '{sample}_1.fastq',
-        R2 = TRIM_DIR + '{sample}_2.fastq'
+        TRIM_DIR + '{sample}.trimmed.fastq',
     params:
-        min_overlap = config['trim_info']['min_overlap'],
-        sample = TRIM_DIR + '{sample}',
-        max_quality = config['trim_info']['max_quality']
+        trimq = config['trim']['trimq'],
+        minlen = config['trim']['minlen'],
+        adaptor = config['trim']['adaptor']
     conda:
-        'envs/ngmerge_env.yml'
+        'envs/bbmap_env.yml'
     threads: config['thread_info']['trim']
+    log:
+        LOG_DIR + 'trim/{sample}.trim.log'
+    benchmark:
+        BENCH_DIR + 'trim/{sample}.trimBenchmark.txt'
     shell:
         """
-        NGmerge \
-        -1 {input.R1} \
-        -2 {input.R2} \
-        -n {threads} \
-        -a \
-        -e {params.min_overlap} \
-        -o {params.sample} \
-        -u {params.max_quality} \
-        -v
+        bbduk.sh \
+        in={input} \
+        out={output} \
+        ref={params.adaptor} \
+        threads={threads} \
+        k=19 \
+        mink=5 \
+        hdist=1 \
+        hdist2=0 \
+        ktrim=r \
+        qtrim=r \
+        minlength={params.minlen} \
+        trimq={params.trimq} \
+        2> {log}
         """

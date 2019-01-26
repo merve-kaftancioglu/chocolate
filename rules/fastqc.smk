@@ -1,14 +1,13 @@
-ALL.extend([expand('{directory}{sample}_{read}{extension}',
+ALL.extend([expand('{directory}{sample}{extension}',
                   directory = QC_DIR,
                   sample = SAMPLE_NAMES,
-                  read = READS,
                   extension = '_fastqc.zip')])
 
 rule fastqc:
     input:
-        fastq = FASTQ_DIR + '{sample}_{read}.fastq',
+        fastq = FASTQ_DIR + '{sample}.fastq',
     output:
-        fastq = QC_DIR + '{sample}_{read}_fastqc.zip',
+        fastq = QC_DIR + '{sample}_fastqc.zip',
     params:
         qc_dir = QC_DIR,
         format = 'fastq',

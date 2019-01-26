@@ -15,7 +15,8 @@ rule bwa_index:
         prefix = ORG,
         tmp = expand('{org}{extension}',
                     org = ORG,
-                    extension = ['.amb','.ann','.bwt','.pac','.sa'])
+                    extension = ['.amb','.ann','.bwt','.pac','.sa']),
+        outdir = REF_DIR
     conda:
         'envs/bwa_env.yml'
     shell:
@@ -23,5 +24,5 @@ rule bwa_index:
         bwa index \
         -p {params.prefix} \
         {input}
-        mv {params.tmp} {output}
+        mv {params.tmp} {params.outdir}
         """

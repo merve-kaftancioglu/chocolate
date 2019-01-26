@@ -19,7 +19,6 @@ _Steps_
  - `-F 4` - exclude non-mapping reads
  - `-F 256` - exclude multi-mapping reads
  - `-F 1024` - exclude PCR or optical duplicates
- - Convert sam to bed (`bedtools`)
  - Sort and index (`samtools`)
  - ChIP QC steps for enrichment (`deepTools`, `phantompeakqualtools`, `calculateNSCRSC.r`, `ngsplot`)
  - Call peaks (`MACS2`)

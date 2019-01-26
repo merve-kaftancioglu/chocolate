@@ -1,15 +1,14 @@
-ALL.extend([expand('{directory}{sample}_{read}{extension}',
+ALL.extend([expand('{directory}{sample}{extension}',
                   directory = MULTI_DIR,
                   sample = SAMPLE_NAMES,
-                  read = READS,
                   extension = ['_screen.html','_screen.txt'])])
 
 rule fastq_screen_multi:
     input:
-        fastq = FASTQ_DIR + '{sample}_{read}.fastq',
+        fastq = FASTQ_DIR + '{sample}.fastq',
     output:
-        html = MULTI_DIR + '{sample}_{read}_screen.html',
-        txt = MULTI_DIR + '{sample}_{read}_screen.txt',
+        html = MULTI_DIR + '{sample}_screen.html',
+        txt = MULTI_DIR + '{sample}_screen.txt',
     params:
         output_dir = MULTI_DIR,
         subset = config['fastq_screen']['subset'],

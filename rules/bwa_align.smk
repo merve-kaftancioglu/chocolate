@@ -6,8 +6,7 @@ ALL.extend([expand('{directory}{sample}{extension}',
 rule bwa_align:
     input:
         index = REF_DIR + ORG + '.bwt',
-        R1 = TRIM_DIR + '{sample}_1.fastq',
-        R2 = TRIM_DIR + '{sample}_2.fastq',
+        reads = TRIM_DIR + '{sample}.fastq',
     output:
         sam = ALN_DIR + '{sample}.sam',
     params:
@@ -25,8 +24,7 @@ rule bwa_align:
         -M \
         -t {threads} \
         {params.org} \
-        {input.R1} \
-        {input.R2} \
+        {input.reads} \
         > {output.sam} \
         2> {log.bwa}
         """

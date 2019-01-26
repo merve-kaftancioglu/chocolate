@@ -1,7 +1,7 @@
 ALL.extend([expand('{directory}{sample}{extension}',
                   directory = MD_DIR,
                   sample = SAMPLE_NAMES,
-                  extension = ['.filtered.bam','.filtered.bam.bai']),])
+                  extension = ['.filtered.sorted.bam','.filtered.sorted.bam.bai']),])
                     
 rule filter_bam:
     input:
@@ -9,7 +9,8 @@ rule filter_bam:
         bai = MD_DIR + '{sample}.mkdp.bai',
     output:
         bam = MD_DIR + '{sample}.filtered.bam',
-        bai = MD_DIR + '{sample}.filtered.bam.bai',
+        sorted = ALN_DIR + '{sample}.filtered.sorted.bam',
+        bai = MD_DIR + '{sample}.filtered.sorted.bam.bai',
     params:
         mapquality = config['filter_bam']['mapquality'],
         tmp = MD_DIR + '{sample}_filter'
@@ -24,15 +25,14 @@ rule filter_bam:
         -@ {threads} \
         -b \
         -h \
-        -f 3 \
+        -q 1 \
         -F 4 \
-        -F 8 \
         -F 256 \
         -F 1024 \
-        -F 2048 \
         -q {params.mapquality} \
         {input.bam} \
         > {output.bam}
         rm -rf {params.tmp}
-        samtools index -@ {threads} -b {output.bam}
+        samtools sort -@ {threads} -o {output.sorted} {output.bam}
+        samtools index -@ {threads} -b {output.sorted}
         """

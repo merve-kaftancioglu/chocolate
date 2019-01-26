@@ -14,3 +14,5 @@ scripts/._removeChrom.py
 scripts/._SAMtoBED.py
 scripts/._SAMtoBED2.py
 ._README.md
+*.DS_Store
+.snakemake/*
