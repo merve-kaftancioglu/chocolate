@@ -99,11 +99,10 @@ include: 'rules/calculateNSCRSC.smk'
 include: 'rules/plotFingerprint.smk'
 include: 'rules/bamCoverage.smk'
 include: 'rules/multiBamSummary.smk'
+include: 'rules/plotCorrelationScatter.smk'
+include: 'rules/plotCorrelationHeatmap.smk'
+include: 'rules/plotPCA.smk'
 # include: 'rules/macs2.smk'
-# include: 'rules/ataqv.smk'
-# include: 'rules/ataqv_html.smk'
-# include: 'rules/peaks2bed.smk'
-# include: 'rules/nucleoatac.smk'
 
 #rule all
 rule all:

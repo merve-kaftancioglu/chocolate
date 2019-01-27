@@ -18,10 +18,10 @@ rule bamCoverage:
     shell:
         """
         bamCoverage \
-            --bam {input} \
-            --normalizeUsing {params.normalizeUsing} \
-            --extendReads {params.extendReads} \
-            --binSize {params.binSize} \
-            --numberOfProcessors {threads} \
-            --outFileName {output}
+        --bam {input} \
+        --normalizeUsing {params.normalizeUsing} \
+        --extendReads {params.extendReads} \
+        --binSize {params.binSize} \
+        --numberOfProcessors {threads} \
+        --outFileName {output}
         """

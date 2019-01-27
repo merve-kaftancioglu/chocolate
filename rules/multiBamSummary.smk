@@ -17,12 +17,12 @@ rule multiBamSummary:
     shell:
         """
         multiBamSummary \
-            bins \
-            --bamfiles {input} \
-            --extendReads {params.extendReads} \
-            --binSize {params.binSize} \
-            --numberOfProcessors {threads} \
-            --ignoreDuplicates \
-            --centerReads \
-            -o {output}
+        bins \
+        --bamfiles {input} \
+        --extendReads {params.extendReads} \
+        --binSize {params.binSize} \
+        --numberOfProcessors {threads} \
+        --ignoreDuplicates \
+        --centerReads \
+        -o {output}
         """

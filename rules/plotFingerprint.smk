@@ -22,16 +22,16 @@ rule plotFingerprint:
     shell:
         """
         plotFingerprint \
-            --bamfiles {input} \
-            --plotFile {output.pdf} \
-            --outRawCounts {output.counts} \
-            --extendReads {params.extendReads} \
-            --skipZeros \
-            --ignoreDuplicates \
-            --numberOfSamples {params.numberOfSamples} \
-            --binSize {params.binSize} \
-            --plotFileFormat pdf \
-            --numberOfProcessors {threads} \
-            --smartLabels \
-            --plotTitle "Fingerprints"
+        --bamfiles {input} \
+        --plotFile {output.pdf} \
+        --outRawCounts {output.counts} \
+        --extendReads {params.extendReads} \
+        --skipZeros \
+        --ignoreDuplicates \
+        --numberOfSamples {params.numberOfSamples} \
+        --binSize {params.binSize} \
+        --plotFileFormat pdf \
+        --numberOfProcessors {threads} \
+        --smartLabels \
+        --plotTitle "Fingerprints"
         """
