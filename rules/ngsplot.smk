@@ -1,7 +1,7 @@
 ALL.extend([expand('{directory}{region}{type}{extension}',
                   directory = NGS_DIR,
                   region = ['Genebody','TSS'],
-                  type = ['avgprof','heatmap'],
+                  type = ['.avgprof','.heatmap'],
                   extension = '.pdf'),])
                     
 rule ngsplot:
@@ -15,7 +15,7 @@ rule ngsplot:
         file = expand('{directory}{region}{type}{extension}',
                      directory = NGS_DIR,
                      region = ['Genebody','TSS'],
-                     type = ['avgprof','heatmap'],
+                     type = ['.avgprof','.heatmap'],
                      extension = '.pdf')
     params:
         generate = 'scripts/ngs_config_generate.r',
