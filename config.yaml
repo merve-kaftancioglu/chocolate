@@ -58,6 +58,8 @@ multiBamSummary:
     binSize: 10000
 phantompeakqual:
     run: 'Y' #add Y to run
+ngsplot:
+    genome: 'GRCm38'
 peaks2bed:
     sizes: '/ccmb/BioinfCore/ActiveProjects/LSA_Denver_rdenver_CU5_cjsifuen_HI-2462/analysis_12_06/references/all.chrom.sizes'
     

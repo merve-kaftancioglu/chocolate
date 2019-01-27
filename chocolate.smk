@@ -54,6 +54,7 @@ MD_DIR = ANALYSIS_DIR + 'mark_duplicates/'
 PEAKS_DIR = ANALYSIS_DIR + 'peaks/'
 DEEP_DIR = ANALYSIS_DIR + 'deeptools/'
 PHANTOM_DIR = ANALYSIS_DIR + 'phantompeak/'
+NGS_DIR = ANALYSIS_DIR + 'ngsplot/'
 LOG_DIR = ANALYSIS_DIR + 'logs/'
 BENCH_DIR = ANALYSIS_DIR + 'benchmark/'
 
@@ -102,6 +103,7 @@ include: 'rules/multiBamSummary.smk'
 include: 'rules/plotCorrelationScatter.smk'
 include: 'rules/plotCorrelationHeatmap.smk'
 include: 'rules/plotPCA.smk'
+include: 'rules/ngsplot.smk'
 # include: 'rules/macs2.smk'
 
 #rule all
