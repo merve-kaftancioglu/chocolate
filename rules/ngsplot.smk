@@ -1,5 +1,8 @@
-ALL.extend([NGS_DIR + 'Genebody.pdf',
-            NGS_DIR + 'TSS.pdf',])
+ALL.extend([expand('{directory}{region}{type}{extension}',
+                  directory = NGS_DIR,
+                  region = ['Genebody','TSS'],
+                  type = ['avgprof','heatmap'],
+                  extension = '.pdf'),])
                     
 rule ngsplot:
     input:
@@ -9,19 +12,21 @@ rule ngsplot:
               extension = '.filtered.sorted.bam')
     output:
         ngs_conf = NGS_DIR + 'ngsplot_config',
-        gb = NGS_DIR + 'Genebody.pdf',
-        tss = NGS_DIR + 'TSS.pdf',
+        file = expand('{directory}{region}{type}{extension}',
+                     directory = NGS_DIR,
+                     region = ['Genebody','TSS'],
+                     type = ['avgprof','heatmap'],
+                     extension = '.pdf')
     params:
-        generate = 'scripts/ngsplot_config.r',
+        generate = 'scripts/ngs_config_generate.r',
         outdir = NGS_DIR,
         gb = NGS_DIR + 'Genebody',
         tss = NGS_DIR + 'TSS',
         genome = config['ngsplot']['genome']
-    conda:
-        'envs/ngsplot_env.yml'
     shell:
         """
-        ngs_config_generate.r {params.outdir} {input}
+        source activate ngsplot_env
+        {params.generate} {params.outdir} {input}
         ngs.plot.r \
         -G {params.genome} \
         -R genebody \
