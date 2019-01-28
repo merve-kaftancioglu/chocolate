@@ -4,3 +4,4 @@ scripts/._*
 ._README.md
 *.DS_Store
 .snakemake/*
+Sample_*
