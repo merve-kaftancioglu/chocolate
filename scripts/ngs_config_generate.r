@@ -19,7 +19,7 @@ table<-as.data.frame(table)
 for (i in 1:length(datafiles)){
    table[i,1]<-datafiles[i]
    table[i,2]<-(-1)
-   table[i,3]<-paste('"', gsub(".filtered.sorted.bam", "", as.character(basenane(datafiles[i]))), '"', sep="")
+   table[i,3]<-paste('"', gsub(".filtered.sorted.bam", "", as.character(basename(datafiles[i]))), '"', sep="")
 }
 table<-table[order(table[,1]),]
 write.table(table, file=paste0(dir,"/ngsplot_config"),sep='\t', quote=FALSE, row.names=FALSE, col.names=FALSE)

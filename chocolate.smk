@@ -51,6 +51,7 @@ BIOTYPE_DIR = QC_DIR + 'biotype/'
 TRIM_DIR = ANALYSIS_DIR + 'fastq_trimmed/'
 ALN_DIR = ANALYSIS_DIR + 'aligned/'
 MD_DIR = ANALYSIS_DIR + 'mark_duplicates/'
+ALTERED_DIR = ANALYSIS_DIR + 'altered_bam/'
 PEAKS_DIR = ANALYSIS_DIR + 'peaks/'
 DEEP_DIR = ANALYSIS_DIR + 'deeptools/'
 PHANTOM_DIR = ANALYSIS_DIR + 'phantompeak/'
@@ -78,6 +79,8 @@ ALL = []
 
 #run phantompeakqual?
 RUN_PHANTOM = config['phantompeakqual']['run']
+#ensembl?
+ENSEMBL = config['ngsplot']['ensembl']
 
 #load rules
 include: 'rules/get_fastq.smk'

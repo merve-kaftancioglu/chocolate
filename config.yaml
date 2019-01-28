@@ -60,6 +60,7 @@ phantompeakqual:
     run: 'Y' #add Y to run
 ngsplot:
     genome: 'mm10'
+    ensembl: 'Y' #add Y if genome was from ensembl
 peaks2bed:
     sizes: '/ccmb/BioinfCore/ActiveProjects/LSA_Denver_rdenver_CU5_cjsifuen_HI-2462/analysis_12_06/references/all.chrom.sizes'
     

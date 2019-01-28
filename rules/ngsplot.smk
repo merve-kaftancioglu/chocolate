@@ -7,6 +7,12 @@ ALL.extend([expand('{directory}{region}{type}{extension}',
 rule ngsplot:
     input:
         expand('{directory}{sample}{extension}',
+              directory = ALTERED_DIR,
+              sample = SAMPLE_NAMES,
+              extension = '.filtered.sorted.bam') \
+        if ENSEMBL.upper() == 'Y' \
+        else \
+        expand('{directory}{sample}{extension}',
               directory = MD_DIR,
               sample = SAMPLE_NAMES,
               extension = '.filtered.sorted.bam')
