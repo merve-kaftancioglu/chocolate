@@ -56,9 +56,9 @@ PEAKS_DIR = ANALYSIS_DIR + 'peaks/'
 DEEP_DIR = ANALYSIS_DIR + 'deeptools/'
 PHANTOM_DIR = ANALYSIS_DIR + 'phantompeak/'
 NGS_DIR = ANALYSIS_DIR + 'ngsplot/'
+PEPR_DIR = ANALYSIS_DIR + 'pepr/'
 LOG_DIR = ANALYSIS_DIR + 'logs/'
 BENCH_DIR = ANALYSIS_DIR + 'benchmark/'
-
 
 #make pjdir
 if not os.path.exists(ANALYSIS_DIR):
@@ -74,13 +74,17 @@ SAMPLE_ID = [(x).split('_')[1] for x in SAMPLE_NAMES]
 #read extensions (paired)
 READS = config['read_info']['paired_ext']
 
-#set empty all list
-ALL = []
+#get file basenames for groups 
+PEPR_GROUPS_DICT = config['pepr_groups']
+PEPR_GROUP_NAMES = list(PEPR_GROUPS_DICT.keys())
 
 #run phantompeakqual?
 RUN_PHANTOM = config['phantompeakqual']['run']
 #ensembl?
 ENSEMBL = config['ngsplot']['ensembl']
+
+#set empty all list
+ALL = []
 
 #load rules
 include: 'rules/get_fastq.smk'
@@ -107,7 +111,7 @@ include: 'rules/plotCorrelationScatter.smk'
 include: 'rules/plotCorrelationHeatmap.smk'
 include: 'rules/plotPCA.smk'
 include: 'rules/ngsplot.smk'
-# include: 'rules/macs2.smk'
+include: 'rules/pepr_peaks.smk'
 
 #rule all
 rule all:

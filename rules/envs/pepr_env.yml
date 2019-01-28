@@ -1,0 +1,43 @@
+name: pepr_env
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+  - ged
+  - http://conda.anaconda.org/dranew
+dependencies:
+  - bbmap=37.90
+  - bcftools=1.6
+  - htslib=1.7
+  - pepr=1.1.18
+  - pysam=0.14.0
+  - samtools=1.7
+  - sharedmem=0.3.5
+  - bzip2=1.0.6
+  - ca-certificates=2018.1.18
+  - certifi=2018.1.18
+  - curl=7.55.1
+  - krb5=1.14.2
+  - libssh2=1.8.0
+  - ncurses=5.9
+  - openssl=1.0.2n
+  - pip=9.0.1
+  - python=3.6.4
+  - readline=7.0
+  - setuptools=38.5.2
+  - sqlite=3.20.1
+  - tk=8.6.7
+  - wheel=0.30.0
+  - xz=5.2.3
+  - zlib=1.2.11
+  - intel-openmp=2018.0.0
+  - libgcc=7.2.0
+  - libgcc-ng=7.2.0
+  - libgfortran-ng=7.2.0
+  - libstdcxx-ng=7.2.0
+  - mkl=2018.0.1
+  - numpy=1.14.1
+  - openjdk=8.0.121
+  - scipy=1.0.0
+prefix: /home/cjsifuen/miniconda3/envs/pepr_env
+

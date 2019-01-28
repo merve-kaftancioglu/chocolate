@@ -22,6 +22,7 @@ thread_info:
     ataqv: 16
     phantompeakqual: 20
     deeptools: 40
+    pepr: 20
 fastq_screen:
     aligner: 'bowtie2'
     subset: 10000
@@ -61,6 +62,21 @@ phantompeakqual:
 ngsplot:
     genome: 'mm10'
     ensembl: 'Y' #add Y if genome was from ensembl
+macs2:
+    diff: #add Y if want to call diff 
+    metadata: '/ccmb/BioinfCore/ActiveProjects/LSA_Denver_rdenver_CS3_cjsifuen_HI-2582/sample_metadata.txt'
+    contrast: '/ccmb/BioinfCore/ActiveProjects/LSA_Denver_rdenver_CS3_cjsifuen_HI-2582/contrasts.txt'
+pepr_info:
+    peak_type: 'sharp'
+    normalization_type: 'inter-group'
+    format: 'bam'
+    threshold: '0.05'
+    window: '200'
+    shiftsize: '200'
+pepr_groups:
+    klf13:
+        input: ['Sample_117004', 'Sample_117005', 'Sample_117006', 'Sample_117007']
+        chip: ['Sample_118382', 'Sample_118383', 'Sample_118384', 'Sample_118385']
 peaks2bed:
     sizes: '/ccmb/BioinfCore/ActiveProjects/LSA_Denver_rdenver_CU5_cjsifuen_HI-2462/analysis_12_06/references/all.chrom.sizes'
     

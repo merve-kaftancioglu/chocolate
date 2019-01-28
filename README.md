@@ -7,6 +7,8 @@ The **chocolate** pipeline accepts fastq files, and emits various QC files (for 
 
 The pipeline is based on an existing pipline by NF-Core (https://github.com/nf-core/chipseq), as well as a pipeline that I created previously. At the moment, the pipeline assumes single-end sequencing, but can be extended to paired-end sequencing later.
 
+Additionally, this pipeline assumes biological replicates and makes use of that information in peak calling with `PePr`.
+
 **chocolate** performs the following steps:
 
 _Steps_
@@ -21,7 +23,7 @@ _Steps_
  - `-F 1024` - exclude PCR or optical duplicates
  - Sort and index (`samtools`)
  - ChIP QC steps for enrichment (`deepTools`, `phantompeakqualtools`, `calculateNSCRSC.r`, `ngsplot`)
- - Call peaks (`MACS2`)
+ - Call peaks (`PePr`)
  - ChIP peak annotation (`chippeakanno`)
 
 **chocolate** is implemented in Snakemake and makes use of several bioinformatic tools. Two main files (`chocolate.smk` and `config.yaml`) and a host of supporting files/directories (`rules/`, `snakemake_env.yml`) are necessary. See below. 
