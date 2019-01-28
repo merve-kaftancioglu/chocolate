@@ -112,6 +112,7 @@ include: 'rules/plotCorrelationHeatmap.smk'
 include: 'rules/plotPCA.smk'
 include: 'rules/ngsplot.smk'
 include: 'rules/pepr_peaks.smk'
+include: 'rules/pepr_peaks_parse.smk'
 
 #rule all
 rule all:
