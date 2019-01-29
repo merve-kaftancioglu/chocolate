@@ -113,6 +113,7 @@ include: 'rules/plotPCA.smk'
 include: 'rules/ngsplot.smk'
 include: 'rules/pepr_peaks.smk'
 include: 'rules/pepr_peaks_parse.smk'
+# include: 'rules/pepr_chipseeker.smk'
 
 #rule all
 rule all:

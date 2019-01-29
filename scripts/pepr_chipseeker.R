@@ -58,7 +58,6 @@ message('loading libraries begins')
 suppressPackageStartupMessages(library('ChIPseeker', character.only=TRUE))
 suppressPackageStartupMessages(library('clusterProfiler', character.only=TRUE))
 suppressPackageStartupMessages(library('data.table', character.only=TRUE))
-suppressPackageStartupMessages(library('BiocParallel', character.only=TRUE))
 
 #test options
 #opt$peaks <- '/Users/cjsifuen/ActiveProjects/LSA_Denver_rdenver_CS3_cjsifuen_HI-2582/analysis_01_25/pepr/sharp/peaks/klf13__PePr_peaks_fixed_chr.bed'

@@ -13,8 +13,6 @@ rule pepr_chipseeker:
         annodb = config['pepr_chipseeker']['annodb'],
         outDir = PEPR_DIR + config['pepr_info']['peak_type'] + '/peaks/',
         script = 'scripts/pepr_chipseeker.R'
-    conda:
-        'envs/chipseeker_env.yml'
     shell:
          """
          Rscript {params.script} \
