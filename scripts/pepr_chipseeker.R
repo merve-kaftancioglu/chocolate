@@ -19,12 +19,15 @@ print_options <- function(opt) {
 }
 
 library(optparse)
+
 #create parser object
 option_list = list(
   make_option(c('-p', '--peaks'), type = 'character', default = NULL,
               help = 'Path to PePr peaks.'),
-  make_option(c('-s', '--species'), type = 'character', default = NULL,
-              help = 'Species.'),
+  make_option(c('-t', '--txdb'), type = 'character', default = NULL,
+              help = 'Name of TxDb to load'),
+  make_option(c('-a', '--annodb'), type = 'character', default = NULL,
+              help = 'Name of AnnotationDb to load'),
   make_option(c('-o', '--outDir'), type = 'character', default = 'deseq_output',
               help = 'Output directory to write all generated subdirectories.')
 );
@@ -36,14 +39,17 @@ opt = parse_args(opt_parser)
 if (is.null(opt$peaks)) {
   print_help(opt_parser)
   stop('Path to PePr called peaks must be supplied (--peaks).', call.=FALSE)
-} else if (is.null(opt$species)) {
+} else if (is.null(opt$txdb)) {
   print_help(opt_parser)
-  stop('Species must be supplied (--species).', call.=FALSE)
+  stop('TxDb must be supplied (--txdb).', call.=FALSE)
+} else if (is.null(opt$annodb)) {
+  print_help(opt_parser)
+  stop('AnnotationDb must be supplied (--annodb).', call.=FALSE)
 } else if (is.null(opt$outDir)) {
   print_help(opt_parser)
   stop('Output directory to write all generated plots and files (--outDir).', call.=FALSE)
 } else
-  message('Inputs detected: peaks, species, outDir Continue...')
+  message('Inputs detected: peaks, txdb, annodb, outDir Continue...')
 
 print_options(opt)
 
@@ -54,113 +60,215 @@ suppressPackageStartupMessages(library('clusterProfiler', character.only=TRUE))
 suppressPackageStartupMessages(library('data.table', character.only=TRUE))
 suppressPackageStartupMessages(library('BiocParallel', character.only=TRUE))
 
+#test options
+opt$peaks <- '/Users/cjsifuen/ActiveProjects/LSA_Denver_rdenver_CS3_cjsifuen_HI-2582/analysis_01_25/pepr/sharp/peaks/klf13__PePr_peaks_fixed_chr.bed'
+opt$txdb <- 'TxDb.Mmusculus.UCSC.mm10.knownGene'
+opt$annodb <- 'org.Mm.eg.db'
+opt$outDir <- '/Users/cjsifuen/ActiveProjects/LSA_Denver_rdenver_CS3_cjsifuen_HI-2582/analysis_01_25/pepr/sharp/peaks/'
 
-#load database for organism
-ParseSpeciesInfo <- function(speciesInfoFile, species) {
-  df <- read.table(file=speciesInfoFile, header = TRUE, sep = '\t', stringsAsFactors = FALSE, as.is = TRUE, quote = '') #read in file
-  kegg.db <- df$kegg[df$species == species] #get kegg database name for species
-  go.db <- df$go[df$species == species] #get go database name for species
-  react.db <- df$reactome[df$species == species] #get reactome database name for species
-  return (list(kegg.db, go.db, react.db))
+basefile <- basename(tools::file_path_sans_ext(opt$peaks))
+
+#### need to account for possibility that an uninstalled database is named
+if (as.character(opt$txdb) %in% rownames(installed.packages())) { 
+  suppressPackageStartupMessages(library(opt$txdb, character.only = TRUE))
+} else { #### stop
+  stop(paste0(opt$txdb, ' package was not found. Please install TxDb database package for species of interest.'))
 }
 
-db.data <- ParseSpeciesInfo(speciesInfoFile = "~/Documents/Core/watermelon/functionalAnnotation/species_database_names.txt", species = species) 
-go.db <- unlist(db.data[2]) #data[2] = go database
-
-#### need to account for possibility that an unspecified species is named
-if (as.character(go.db) %in% rownames(installed.packages())) { 
-  suppressPackageStartupMessages(library(go.db, character.only = TRUE))
-} else { #### specify stop
-  stop(paste0(go.db, ' package was not found. Please install GO database package for species of interest.'))
+if (as.character(opt$annodb) %in% rownames(installed.packages())) { 
+  suppressPackageStartupMessages(library(opt$annodb, character.only = TRUE))
+} else { #### stop
+  stop(paste0(opt$annodb, ' package was not found. Please install AnnotationDb database package for species of interest.'))
 }
 
+#####
+# Get peaks and txdb
+####
 
-library(TxDb.Mmusculus.UCSC.mm10.knownGene)
-txdb <- TxDb.Mmusculus.UCSC.mm10.knownGene
-
+#get txdb
+assign(x = 'txdb', value = get(opt$txdb))
 
 #read in peaks
-peak <- readPeakFile(peakfile = '/Users/cjsifuen/ActiveProjects/LSA_Denver_rdenver_CS3_cjsifuen_HI-2582/analysis_01_25/pepr/sharp/peaks/klf13__PePr_peaks_fixed_chr.bed')
+peak <- readPeakFile(peakfile = opt$peaks)
 
-#coverage plots
-peak_covplot <- covplot(peak = peak, 
-                 weightCol = 'V5')
 
+#####
+# Coverage plots
+#####
+
+cat('Calculating and plotting coverage...', fill = T)
+pdf(file = paste(opt$outDir,'CoverageByChrom.pdf', sep = '/'), onefile = TRUE)
+covplot(peak = peak, 
+        weightCol = 'V5')
+dev.off()
+
+#####
+# TSS related plots
+#####
+
+cat('Beginning TSS plots...', fill = T)
 #heatmap peaks at tss regions
-#promoter <- getPromoters(TxDb = txdb, upstream = 3000, downstream = 3000)
-#tagMatrix <- getTagMatrix(peak, windows = promoter)
-#tagHeatmap(tagMatrix = tagMatrix, color='red', xlim = c(-3000,3000))
-peak_tssHeatmap <- peakHeatmap(peak = peak, 
-                               weightCol = 'V5', 
-                               TxDb = txdb, 
-                               upstream = 3000, 
-                               downstream = 3000, 
-                               color = 'red')
+pdf(file = paste(opt$outDir,'PeaksHeatmapTSS.pdf', sep = '/'), onefile = TRUE)
+peakHeatmap(peak = peak, 
+            weightCol = 'V5', 
+            TxDb = txdb, 
+            upstream = 3000, 
+            downstream = 3000,
+            xlab = "Genomic Region (5'->3')", 
+            color = 'red')
+dev.off()
 
 #profile peaks at tss regions
-peak_tssProfile <- plotAvgProf2(peak = peak, 
-                                TxDb=txdb, 
-                                upstream=3000, 
-                                weightCol = 'V5',
-                                downstream=3000,
-                                conf = 0.95,
-                                xlab="Genomic Region (5'->3')", 
-                                ylab = "Read Count Frequency")
+pdf(file = paste(opt$outDir,'PeaksAvgProfileTSS.pdf', sep = '/'), onefile = TRUE)
+plotAvgProf2(peak = peak, 
+             TxDb=txdb, 
+             upstream=3000, 
+             weightCol = 'V5',
+             downstream=3000,
+             conf = 0.95,
+             xlab="Genomic Region (5'->3')",
+             ylab = "Read Count Frequency")
+dev.off()
 
-#profile peaks at gene, intron, exon
+#####
+# Genebody related plots
+#####
+
+cat('Getting genebody regions...', fill = T)
+
+#profile peaks at gene
 gene <- getBioRegion(TxDb = txdb, upstream = 3000, downstream = 3000, by = 'gene')
-exon <- getBioRegion(TxDb = txdb, upstream = 1000, downstream = 1000, by = 'exon')
-intron <- getBioRegion(TxDb = txdb, upstream = 1000, downstream = 1000, by = 'intron')
-
 geneTagMatrix <- getTagMatrix(peak = peak, 
                               weightCol = 'V5',
                               windows = gene)
-exonTagMatrix <- getTagMatrix(peak = peak,
-                              weightCol = 'V5',
-                              windows = exon)
-intronTagMatrix <- getTagMatrix(peak = peak, 
-                               weightCol = 'V5',
-                               windows = intron)
-#profile peaks Heatmaps 
-peak_geneHeatmap <- tagHeatmap(tagMatrix = geneTagMatrix, 
-                               color='red', 
-                               xlim = c(-3000,3000))
 
-peak_exonHeatmap <- tagHeatmap(tagMatrix = exonTagMatrix, 
-                               color='red', 
-                               xlim = c(-1000,1000))
+cat('Beginning genebody plots...', fill = T)
 
-peak_intronHeatmap <- tagHeatmap(tagMatrix = intronTagMatrix, 
-                               color='red', 
-                               xlim = c(-1000,1000))
+#heatmap peaks at genebody regions
+pdf(file = paste(opt$outDir,'PeaksHeatmapGenebody.pdf', sep = '/'), onefile = TRUE)
+tagHeatmap(tagMatrix = geneTagMatrix, 
+           color='red',
+           xlab = "Genomic Region (5'->3')", 
+           xlim = c(-3000,3000))
+dev.off()
 
-#profile peaks plot
-peak_geneProfile <- plotAvgProf(tagMatrix = geneTagMatrix, 
+#profile peaks at genebody regions
+pdf(file = paste(opt$outDir,'PeaksAvgProfileGenebody.pdf', sep = '/'), onefile = TRUE)
+plotAvgProf(tagMatrix = geneTagMatrix, 
                                 xlim=c(-3000, 3000), 
                                 xlab="Genomic Region (5'->3')", 
                                 ylab = "Read Count Frequency", 
                                 conf = 0.95)
-peak_exonProfile <- plotAvgProf(tagMatrix = exonTagMatrix, 
-                                xlim=c(-1000, 1000), 
-                                xlab="Genomic Region (5'->3')", 
-                                ylab = "Read Count Frequency", 
-                                conf = 0.95)
-peak_intronProfile <- plotAvgProf(tagMatrix = intronTagMatrix, 
-                                  xlim=c(-1000, 1000), 
-                                  xlab="Genomic Region (5'->3')", 
-                                  ylab = "Read Count Frequency", 
-                                  conf = 0.95)
+dev.off()
+
+
+#####
+# Exon related plots
+#####
+
+cat('Getting exon regions...', fill = T)
+#profile peaks at exon
+exon <- getBioRegion(TxDb = txdb, upstream = 1000, downstream = 1000, by = 'exon')
+exonTagMatrix <- getTagMatrix(peak = peak,
+                              weightCol = 'V5',
+                              windows = exon)
+
+cat('Beginning exon plots...', fill = T)
+#heatmap peaks at exon regions
+pdf(file = paste(opt$outDir,'PeaksHeatmapExon.pdf', sep = '/'), onefile = TRUE)
+tagHeatmap(tagMatrix = exonTagMatrix, 
+           xlab = "Genomic Region (5'->3')", 
+           color='red', 
+           xlim = c(-1000,1000))
+dev.off()
+
+#profile peaks at exon regions
+pdf(file = paste(opt$outDir,'PeaksAvgProfileExon.pdf', sep = '/'), onefile = TRUE)
+plotAvgProf(tagMatrix = exonTagMatrix, 
+            xlim=c(-1000, 1000), 
+            xlab="Genomic Region (5'->3')", 
+            ylab = "Read Count Frequency", 
+            conf = 0.95)
+dev.off()
+
+#####
+# Intron related plots
+#####
+
+cat('Getting inton regions...', fill = T)
+#profile peaks at intron
+intron <- getBioRegion(TxDb = txdb, upstream = 1000, downstream = 1000, by = 'intron')
+intronTagMatrix <- getTagMatrix(peak = peak, 
+                               weightCol = 'V5',
+                               windows = intron)
+
+cat('Beginning intron plots...', fill = T)
+#heatmap peaks at intron regions
+pdf(file = paste(opt$outDir,'PeaksHeatmapIntron.pdf', sep = '/'), onefile = TRUE)
+tagHeatmap(tagMatrix = intronTagMatrix, 
+           xlab = "Genomic Region (5'->3')", 
+           color='red', 
+           xlim = c(-1000,1000))
+dev.off()
+
+#profile peaks at intron regions
+pdf(file = paste(opt$outDir,'PeaksAvgProfileIntron.pdf', sep = '/'), onefile = TRUE)
+plotAvgProf(tagMatrix = intronTagMatrix, 
+            xlim=c(-1000, 1000), 
+            xlab="Genomic Region (5'->3')", 
+            ylab = "Read Count Frequency", 
+            conf = 0.95)
+dev.off()
+
+
+
+
+#####
+# Peak annotation and plots
+#####
+
+cat('Annotating...', fill = T)
 
 #annotate peaks
-peakAnno <- annotatePeak(peak = peak, tssRegion = c(-3000,3000), TxDb = txdb, annoDb = 'org.Mm.eg.db')
+peakAnno <- annotatePeak(peak = peak, 
+                         tssRegion = c(-3000,3000), 
+                         TxDb = txdb, 
+                         annoDb = opt$annodb)
 peakAnnoDf <- as.data.frame(x = peakAnno)
 
+cat('Writing out annotation...', fill = T)
+write.table(x = peakAnnoDf, 
+            file = paste(opt$outDir, '/' ,basefile, '_annot.bed', sep = ''), 
+            quote = F, 
+            sep = '\t', 
+            row.names = F, 
+            col.names = T)
 
-#plot annotation pie
+
+cat('Annotation plots...', fill = T)
+pdf(file = paste(opt$outDir,'PeaksDistByFeaturePie.pdf', sep = '/'), onefile = TRUE)
 plotAnnoPie(x = peakAnno)
+dev.off()
+
+pdf(file = paste(opt$outDir,'PeaksDistByFeatureBar.pdf', sep = '/'), onefile = TRUE)
 plotAnnoBar(x = peakAnno)
+dev.off()
+
+pdf(file = paste(opt$outDir,'PeaksDistByFeatureVennPie.pdf', sep = '/'), onefile = TRUE)
 vennpie(x = peakAnno)
+dev.off()
+
+pdf(file = paste(opt$outDir,'PeaksByFeatureIntersection.pdf', sep = '/'), onefile = TRUE)
 upsetplot(x = peakAnno)
+dev.off()
+
+pdf(file = paste(opt$outDir,'PeaksByFeatureIntersectionVennPie.pdf', sep = '/'), onefile = TRUE)
 upsetplot(x = peakAnno, vennpie = T)
+dev.off()
+
+pdf(file = paste(opt$outDir,'PeaksByDistanceToTSS.pdf', sep = '/'), onefile = TRUE)
 plotDistToTSS(peakAnno,
               title="Distribution of transcription factor-binding loci\nrelative to TSS")
+dev.off()
+
+cat('Finished.', fill = T)
