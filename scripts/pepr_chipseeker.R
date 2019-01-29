@@ -61,10 +61,10 @@ suppressPackageStartupMessages(library('data.table', character.only=TRUE))
 suppressPackageStartupMessages(library('BiocParallel', character.only=TRUE))
 
 #test options
-opt$peaks <- '/Users/cjsifuen/ActiveProjects/LSA_Denver_rdenver_CS3_cjsifuen_HI-2582/analysis_01_25/pepr/sharp/peaks/klf13__PePr_peaks_fixed_chr.bed'
-opt$txdb <- 'TxDb.Mmusculus.UCSC.mm10.knownGene'
-opt$annodb <- 'org.Mm.eg.db'
-opt$outDir <- '/Users/cjsifuen/ActiveProjects/LSA_Denver_rdenver_CS3_cjsifuen_HI-2582/analysis_01_25/pepr/sharp/peaks/'
+#opt$peaks <- '/Users/cjsifuen/ActiveProjects/LSA_Denver_rdenver_CS3_cjsifuen_HI-2582/analysis_01_25/pepr/sharp/peaks/klf13__PePr_peaks_fixed_chr.bed'
+#opt$txdb <- 'TxDb.Mmusculus.UCSC.mm10.knownGene'
+#opt$annodb <- 'org.Mm.eg.db'
+#opt$outDir <- '/Users/cjsifuen/ActiveProjects/LSA_Denver_rdenver_CS3_cjsifuen_HI-2582/analysis_01_25/pepr/sharp/peaks/'
 
 basefile <- basename(tools::file_path_sans_ext(opt$peaks))
 
