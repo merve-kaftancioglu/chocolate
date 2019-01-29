@@ -77,6 +77,7 @@ pepr_groups:
     klf13:
         input: ['Sample_117004', 'Sample_117005', 'Sample_117006', 'Sample_117007']
         chip: ['Sample_118382', 'Sample_118383', 'Sample_118384', 'Sample_118385']
-peaks2bed:
-    sizes: '/ccmb/BioinfCore/ActiveProjects/LSA_Denver_rdenver_CU5_cjsifuen_HI-2462/analysis_12_06/references/all.chrom.sizes'
+pepr_chipseeker:
+    txdb: 'TxDb.Mmusculus.UCSC.mm10.knownGene'
+    annodb: 'org.Mm.eg.db'
     
