@@ -96,7 +96,7 @@ peak <- readPeakFile(peakfile = opt$peaks)
 #####
 
 cat('Calculating and plotting coverage...', fill = T)
-pdf(file = paste(opt$outDir,'CoverageByChrom.pdf', sep = '/'), onefile = TRUE)
+pdf(file = paste(opt$outDir,'CoverageByChrom.pdf', sep = '/'), onefile = TRUE, bg = 'white')
 covplot(peak = peak, 
         weightCol = 'V5')
 dev.off()
@@ -245,23 +245,11 @@ write.table(x = peakAnnoDf,
 
 
 cat('Annotation plots...', fill = T)
-pdf(file = paste(opt$outDir,'PeaksDistByFeaturePie.pdf', sep = '/'), onefile = TRUE)
+pdf(file = paste(opt$outDir,'PeaksDistByFeature.pdf', sep = '/'), onefile = TRUE, bg = 'white', paper = 'USr')
 plotAnnoPie(x = peakAnno)
-dev.off()
-
-pdf(file = paste(opt$outDir,'PeaksDistByFeatureBar.pdf', sep = '/'), onefile = TRUE)
 plotAnnoBar(x = peakAnno)
-dev.off()
-
-pdf(file = paste(opt$outDir,'PeaksDistByFeatureVennPie.pdf', sep = '/'), onefile = TRUE)
-vennpie(x = peakAnno)
-dev.off()
-
-pdf(file = paste(opt$outDir,'PeaksByFeatureIntersection.pdf', sep = '/'), onefile = TRUE)
+vennpie(x = peakAnno, r = 0.08)
 upsetplot(x = peakAnno)
-dev.off()
-
-pdf(file = paste(opt$outDir,'PeaksByFeatureIntersectionVennPie.pdf', sep = '/'), onefile = TRUE)
 upsetplot(x = peakAnno, vennpie = T)
 dev.off()
 
