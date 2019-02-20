@@ -77,8 +77,10 @@ READS = config['read_info']['paired_ext']
 PEPR_GROUPS_DICT = config['pepr_groups']
 PEPR_GROUP_NAMES = list(PEPR_GROUPS_DICT.keys())
 
-#run phantompeakqual?
+#run specific steps?
 RUN_PHANTOM = config['phantompeakqual']['run']
+RUN_NGSPLOT = config['ngsplot']['run']
+
 #ensembl?
 ENSEMBL = config['ngsplot']['ensembl']
 
@@ -107,7 +109,8 @@ include: 'rules/multiBamSummary.smk'
 include: 'rules/plotCorrelationScatter.smk'
 include: 'rules/plotCorrelationHeatmap.smk'
 include: 'rules/plotPCA.smk'
-include: 'rules/ngsplot.smk'
+if RUN_NGSPLOT.upper() == 'Y':
+    include: 'rules/ngsplot.smk'
 include: 'rules/pepr_peaks.smk'
 include: 'rules/pepr_peaks_parse.smk'
 # include: 'rules/pepr_chipseeker.smk'

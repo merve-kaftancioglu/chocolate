@@ -42,10 +42,6 @@ mark_duplicates:
     createindex: 'true'
 filter_bam:
     mapquality: 30
-macs2:
-    format: 'BEDPE'
-    genome_size: 1137453808
-    shape: 'broad'
 plotFingerprint:
     extendReads: 100
     numberOfSamples: 500000
@@ -60,12 +56,9 @@ multiBamSummary:
 phantompeakqual:
     run: 'Y' #add Y to run
 ngsplot:
+    run: 'Y' #add Y to run
     genome: 'mm10'
     ensembl: 'Y' #add Y if genome was from ensembl
-macs2:
-    diff: #add Y if want to call diff 
-    metadata: '/ccmb/BioinfCore/ActiveProjects/LSA_Denver_rdenver_CS3_cjsifuen_HI-2582/sample_metadata.txt'
-    contrast: '/ccmb/BioinfCore/ActiveProjects/LSA_Denver_rdenver_CS3_cjsifuen_HI-2582/contrasts.txt'
 pepr_info:
     peak_type: 'sharp'
     normalization_type: 'inter-group'
