@@ -5,8 +5,7 @@ channels:
   - ged
   - http://conda.anaconda.org/dranew
 dependencies:
-  - bedtools=2.27.1
-  - zlib=1.2.11
-  - libgcc=7.2.0
-  - libgcc-ng=7.2.0
-  - libstdcxx-ng=7.2.0
+  - homer=4.9.1
+  - libgcc-ng=9.1.0
+  - libstdcxx-ng=9.1.0
+  - perl=5.26.2

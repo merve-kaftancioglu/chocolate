@@ -1,4 +1,3 @@
-name: multiqc_env
 channels:
   - bioconda
   - ged
@@ -81,5 +80,3 @@ dependencies:
   - libstdcxx-ng=7.2.0
   - mkl=2018.0.3
   - numpy=1.14.2
-prefix: /home/cjsifuen/miniconda3/envs/multiqc_env
-

@@ -1,4 +1,3 @@
-name: pepr_env
 channels:
   - bioconda
   - conda-forge
@@ -39,5 +38,3 @@ dependencies:
   - numpy=1.14.1
   - openjdk=8.0.121
   - scipy=1.0.0
-prefix: /home/cjsifuen/miniconda3/envs/pepr_env
-
