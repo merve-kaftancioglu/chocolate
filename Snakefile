@@ -113,6 +113,7 @@ if RUN_NGSPLOT.upper() == 'Y':
     include: 'rules/ngsplot.smk'
 include: 'rules/pepr_peaks.smk'
 include: 'rules/pepr_peaks_parse.smk'
+include: 'rules/homer.smk'
 # include: 'rules/pepr_chipseeker.smk'
 
 #rule all

@@ -23,6 +23,7 @@ thread_info:
     phantompeakqual: 20
     deeptools: 40
     pepr: 20
+    homer: 10
 fastq_screen:
     aligner: 'bowtie2'
     subset: 10000

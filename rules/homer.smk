@@ -6,14 +6,18 @@ rule homer:
     output:
         touch(HOMER_DIR + 'homer.done')
     params:
-         ref = config['']
-    conda: 'envs/homer_env.yml'
-    threads: config['thread_info']['homer']
+         ref = REF_DIR + ORG + '.fa',
+         base = '{chip}',
+         out_base = PEPR_DIR + config['pepr_info']['peak_type'] + '/peaks/{chip}'
+    conda:
+        'envs/homer_env.yml'
+    threads:
+        config['thread_info']['homer']
     shell:
          """
          findMotifsGenome.pl \
          {input} \
-         ${REF}/Xentr41.fa \
-         ${HOMER_OUTPUT}/${BASE} \
+         {params.ref}\
+         {params.out_base} \
          -p {threads}
          """
