@@ -26,5 +26,6 @@ _Steps_
      - `phantompeakqualtools` and `ngsplot` only work for some reference genomes/species
  - Call peaks (`PePr` and `BinQuasi`)
  - ChIP peak annotation (`ChIPseeker` and `annotatr`)
+ - Motif analysis (`homer`)
 
 **chocolate** is implemented in Snakemake and makes use of several bioinformatic tools. Two main files (`chocolate.smk` and `config.yaml`) and a host of supporting files/directories (`rules/`, `snakemake_env.yml`) are necessary. See below. 
