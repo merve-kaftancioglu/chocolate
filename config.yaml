@@ -6,8 +6,8 @@ analysis_dir_suffix:
     'analysis_01_25/'
 input_dir:
     fastq: '/ccmb/BioinfCore/DNASeqCore/Run_2582/denver/Run_2582/denver/'
-    genome_fasta: '/home/cjsifuen/references/mouse/bwa/Mus_musculus.GRCm38.dna.primary_assembly.fa'
-    genome_gtf: '/home/cjsifuen/references/mouse/bwa/Mus_musculus.GRCm38.95.gtf'
+    genome_fasta: '/nfs/lsa-rdenver/data/cjsifuen/home/references/mouse/bwa/Mus_musculus.GRCm38.dna.primary_assembly.fa'
+    genome_gtf: '/nfs/lsa-rdenver/data/cjsifuen/home/references/mouse/bwa/Mus_musculus.GRCm38.95.gtf'
 genome: 
     'GRCm38' 
 library_info:
