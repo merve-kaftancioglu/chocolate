@@ -1,4 +1,4 @@
-ALL.extend(expand([HOMER_DIR + 'homer.done']))
+ALL.extend(expand([HOMER_DIR + 'homer_{chip}.done']))
 
 rule homer:
     input:
