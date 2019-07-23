@@ -1,7 +1,7 @@
 ALL.extend([expand('{directory}{filename}{extension}',
                     directory = HOMER_DIR + config['pepr_info']['peak_type'] + '/',
                     filename = PEPR_GROUP_NAMES,
-                    extension = '{chip}_homer.done')])
+                    extension = '_homer.done')])
 
 rule homer:
     input:
