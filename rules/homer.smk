@@ -5,7 +5,7 @@ ALL.extend([expand('{directory}{filename}{extension}',
 
 rule homer:
     input:
-        PEPR_DIR + config['pepr_info']['peak_type'] + '/peaks/{chip}__PePr_fixed_peaks.bed',
+        PEPR_DIR + config['pepr_info']['peak_type'] + '/peaks/{chip}__PePr_peaks_fixed.bed',
     output:
         touch(HOMER_DIR + config['pepr_info']['peak_type'] + '/{chip}_homer.done')
     params:
