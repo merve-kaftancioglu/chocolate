@@ -8,7 +8,7 @@ rule homer:
     params:
          ref = REF_DIR + ORG + '.fa',
          base = '{chip}',
-         out_base = PEPR_DIR + config['pepr_info']['peak_type'] + '/peaks/{chip}'
+         out_base = HOMER_DIR + config['pepr_info']['peak_type'] + '/peaks/{chip}'
     conda:
         'envs/homer_env.yml'
     threads:
